@@ -27,7 +27,18 @@
 - Removed irrelevant rows, such as those where both "total laid off" and "percentage" fields were null, to streamline the dataset.
 
 ## 9. Date Formatting
-- Encountered formatting issues with certain date entries that did not conform to Excel's date format; imported the CSV file to properly format dates.
+- Encountered formatting issues with certain date entries that did not conform to Excel's date format; imported the CSV file into MySQL Workbench to properly format dates.
+``` sql
+Select `date`, str_to_date(`date`, '%m/%d/%Y') as date_fixed
+from layoffs_copy;
+
+update layoffs_copy
+set `date` = str_to_date(`date`, '%m/%d/%Y');
+
+select *
+from  layoffs_copy;
+```
+  
 
 ## 10. Data Completion
 - Addressed empty fields within the industry column by populating them with appropriate data entries.
